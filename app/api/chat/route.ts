@@ -3,13 +3,16 @@ import OpenAI from 'openai';
 import { getDrivingRoute } from '@/lib/osrm';
 import { findPlacesNearRoute } from '@/lib/places';
 
-const openai = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: process.env.OPENROUTER_API_KEY,
-});
-
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY;
+    
+    // Initialize OpenAI client inside the handler to avoid build-time errors
+    const openai = new OpenAI({
+      baseURL: 'https://openrouter.ai/api/v1',
+      apiKey: apiKey || 'dummy-key-for-build', // Fallback to allow build to pass without env var
+    });
+
     const body = await req.json();
     const { stage, userInputs, messages } = body;
 
