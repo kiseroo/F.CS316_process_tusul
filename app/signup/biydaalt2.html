@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Software Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800">
+    <div class="max-w-6xl mx-auto p-6 md:p-12 space-y-16">
+        
+        <!-- Header -->
+        <header class="text-center space-y-4 border-b pb-8 border-slate-200">
+            <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Software Engineering - Chapter 18</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Distributed Software Engineering</h1>
+            <p class="text-slate-500 max-w-2xl mx-auto text-lg">Орчин үеийн програм хангамжийн инженерчлэлийн үндсэн ойлголтууд</p>
+        </header>
+
+        <!-- Definition -->
+        <section class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-3xl font-bold text-slate-900 border-l-4 border-blue-600 pl-4">Distributed System Гэж Юу Вэ?</h2>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    "Тархсан систем гэдэг нь хэрэглэгчид <span class="font-bold text-slate-800">нэгдмэл нэг систем</span> мэт харагдах, бие даасан компьютеруудын цуглуулга юм."
+                </p>
+                <p class="text-slate-500">
+                    Өнөөдрийн томоохон системүүд болох Google, Facebook, Банкны системүүд бүгд энэ зарчмаар ажилладаг.
+                </p>
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-2xl">
+                <img src="https://fredkamau.com/assets/images/distributed.jpg" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-500" alt="Distributed System">
+            </div>
+        </section>
+
+        <!-- Advantages & Issues -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Advantages -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-xl font-bold text-emerald-600 mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Үндсэн Давуу Талууд
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex gap-4">
+                        <span class="font-bold text-slate-900 min-w-[120px]">Resource Sharing</span>
+                        <span class="text-slate-500 text-sm">Техник хангамж, өгөгдөл хуваалцах боломж.</span>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="font-bold text-slate-900 min-w-[120px]">Openness</span>
+                        <span class="text-slate-500 text-sm">Өөр өөр үйлдвэрлэгчийн төхөөрөмжүүд хорших.</span>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="font-bold text-slate-900 min-w-[120px]">Concurrency</span>
+                        <span class="text-slate-500 text-sm">Зэрэгцэн ажиллах чадвар.</span>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="font-bold text-slate-900 min-w-[120px]">Scalability</span>
+                        <span class="text-slate-500 text-sm">Системийг хялбар өргөтгөх.</span>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="font-bold text-slate-900 min-w-[120px]">Fault Tolerance</span>
+                        <span class="text-slate-500 text-sm">Алдаа гарсан ч систем зогсохгүй байх.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Issues -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-xl font-bold text-rose-600 mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Анхаарах Асуудлууд
+                </h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">1</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Transparency</span>
+                            <span class="text-slate-500 text-xs">Хэрэглэгчид системийн бүтэц мэдэгдэхгүй байх.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">2</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Openness</span>
+                            <span class="text-slate-500 text-xs">Стандарт протокол ашиглах.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">3</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Scalability</span>
+                            <span class="text-slate-500 text-xs">Хэмжээ болон газарзүйн хувьд өргөжих.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">4</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Security</span>
+                            <span class="text-slate-500 text-xs">Мэдээллийн аюулгүй байдал.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">5</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Quality of Service</span>
+                            <span class="text-slate-500 text-xs">Найдвартай ажиллагаа.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold mt-0.5">6</div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">Failure Management</span>
+                            <span class="text-slate-500 text-xs">Алдааг илрүүлэх, засах.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaction Models -->
+        <section>
+            <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">Харилцан Үйлчлэлийн Загварууд</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-blue-50 p-8 rounded-xl border border-blue-100 hover:shadow-md transition-shadow">
+                    <h4 class="text-lg font-bold text-blue-800 mb-2">Procedural (RPC)</h4>
+                    <p class="text-blue-600 text-sm font-medium mb-4 uppercase tracking-wide">Synchronous</p>
+                    <p class="text-slate-600 mb-4">
+                        Процедур дуудах хэлбэрээр ажилладаг. Дуудагч тал хариу иртэл хүлээдэг.
+                    </p>
+                    <div class="text-sm text-slate-500 italic">"Зөөгчид захиалга өгөөд хүлээхтэй адил"</div>
+                </div>
+                <div class="bg-purple-50 p-8 rounded-xl border border-purple-100 hover:shadow-md transition-shadow">
+                    <h4 class="text-lg font-bold text-purple-800 mb-2">Message-Based</h4>
+                    <p class="text-purple-600 text-sm font-medium mb-4 uppercase tracking-wide">Asynchronous</p>
+                    <p class="text-slate-600 mb-4">
+                        Мессеж дамжуулах хэлбэрээр ажилладаг. Илгээгч хариу хүлээх шаардлагагүй.
+                    </p>
+                    <div class="text-sm text-slate-500 italic">"Шуудангийн хайрцагт захиа үлдээхтэй адил"</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Middleware -->
+        <section class="bg-slate-900 text-white rounded-2xl p-8 md:p-12 relative overflow-hidden">
+            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold mb-4 text-orange-400">Middleware</h3>
+                    <p class="text-slate-300 text-lg mb-6">
+                        Тархсан системийн бүрэлдэхүүн хэсгүүдийг холбогч програм хангамжийн давхарга.
+                    </p>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            Харилцан үйлчлэлийг дэмжих
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            Нийтлэг үйлчилгээ үзүүлэх (Аюулгүй байдал, гүйлгээ)
+                        </li>
+                    </ul>
+                </div>
+                <div class="rounded-xl overflow-hidden border-4 border-slate-700">
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20211101162039/middleware-660x269.png" class="w-full h-full object-cover" alt="Middleware">
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Patterns -->
+        <section>
+            <h3 class="text-2xl font-bold text-slate-900 mb-8">Архитектурын 5 Загвар</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="group">
+                    <div class="h-32 bg-white border border-slate-200 rounded-xl mb-3 p-2 flex items-center justify-center overflow-hidden group-hover:border-blue-400 transition-colors">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20241113120736852523/master-slave-architecture.webp" class="max-h-full object-contain">
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">Master-Slave</h4>
+                    <p class="text-xs text-slate-500 mt-1">Real-time systems</p>
+                </div>
+                <div class="group">
+                    <div class="h-32 bg-white border border-slate-200 rounded-xl mb-3 p-2 flex items-center justify-center overflow-hidden group-hover:border-blue-400 transition-colors">
+                        <img src="https://en.training.qatestlab.com/wp-content/uploads/2022/12/2022-11-07_17-31-27.jpg" class="max-h-full object-contain">
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">2-Tier Client-Server</h4>
+                    <p class="text-xs text-slate-500 mt-1">Simple Web Apps</p>
+                </div>
+                <div class="group">
+                    <div class="h-32 bg-white border border-slate-200 rounded-xl mb-3 p-2 flex items-center justify-center overflow-hidden group-hover:border-blue-400 transition-colors">
+                        <img src="https://user-images.githubusercontent.com/22576836/27065856-89c47d74-501d-11e7-9013-d8996a4bc12c.png" class="max-h-full object-contain">
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">Multi-Tier</h4>
+                    <p class="text-xs text-slate-500 mt-1">Banking Systems</p>
+                </div>
+                <div class="group">
+                    <div class="h-32 bg-white border border-slate-200 rounded-xl mb-3 p-2 flex items-center justify-center overflow-hidden group-hover:border-blue-400 transition-colors">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnTjSX6qfcxvRo5-2nrFS2glZ6c4id8sLnFA&s" class="max-h-full object-contain">
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">Distributed Component</h4>
+                    <p class="text-xs text-slate-500 mt-1">Data Mining</p>
+                </div>
+                <div class="group">
+                    <div class="h-32 bg-white border border-slate-200 rounded-xl mb-3 p-2 flex items-center justify-center overflow-hidden group-hover:border-blue-400 transition-colors">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20240515175702/Peer-to-Peer-(P2P)-Architecture.webp" class="max-h-full object-contain">
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">Peer-to-Peer (P2P)</h4>
+                    <p class="text-xs text-slate-500 mt-1">File Sharing</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Layers & SaaS -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-xl font-bold text-slate-900 mb-6">Логик Давхаргууд</h3>
+                <div class="space-y-2">
+                    <div class="bg-slate-100 p-3 rounded text-center font-medium text-slate-700 text-sm">1. Presentation (UI)</div>
+                    <div class="bg-slate-200 p-3 rounded text-center font-medium text-slate-700 text-sm">2. Application Processing</div>
+                    <div class="bg-slate-300 p-3 rounded text-center font-medium text-slate-800 text-sm">3. Data Management</div>
+                    <div class="bg-slate-400 p-3 rounded text-center font-medium text-slate-900 text-sm">4. Database</div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 rounded-2xl text-white shadow-lg">
+                <h3 class="text-xl font-bold mb-4">SaaS (Software as a Service)</h3>
+                <p class="text-blue-100 text-sm mb-6 leading-relaxed">
+                    Алсын сервер дээр байрласан, веб хөтчөөр дамжуулан хэрэглэгчдэд хүрдэг үйлчилгээ.
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
+                        <div class="font-bold text-green-300 mb-1">Давуу тал</div>
+                        <div class="text-xs text-blue-50">Суулгах шаардлагагүй, автомат шинэчлэл.</div>
+                    </div>
+                    <div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
+                        <div class="font-bold text-red-300 mb-1">Сул тал</div>
+                        <div class="text-xs text-blue-50">Интернет хамааралтай.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-slate-400 text-sm pt-8">
+            Ian Sommerville - Software Engineering (9th Edition)
+        </footer>
+    </div>
+</body>
+</html>
